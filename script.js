@@ -1,52 +1,45 @@
-var str = prompt("Enter str: ");
-var key = prompt("Enter key: ");
-key = parseInt(key, 10);
+var message, height, i = 0, a = 1, index = 0, k, subIndex;
+var tempArrStr = [], mainArrStr_p1 = [], mainArrStr_p2 = [], encodeMessage = "";
 
-var i, w;
-i = 0;
-var index = 0;
-var k = key;
+message = prompt("Input message: ");
+height = prompt("Input height: ");
+height = parseInt(height, 10);
 
-var arrstr = [];
-var arrstrmain1 = [];
-var arrstrmain2 = [];
+k = height;
 
-while(i != key){
+while(i != height){
 
-  for (var j = i; j < str.length; j+=2*(key-1)) {
-    arrstr.push(str[j])
+  for (var j = i; j < message.length; j+=2*(height-1)) {
+    tempArrStr.push(message[j])
   }
-  arrstrmain1[i] = arrstr.join("");
-  arrstr = [];
+  mainArrStr_p1[i] = tempArrStr.join("");
+  tempArrStr = [];
 
-  if(i != key-2 && i != key-1){
-    for (var t = k; t < str.length; t+=2*(key-1)) {
-      arrstr.push(str[t]);
+  if(i != height-2 && i != height-1){
+    for (var t = k; t < message.length; t+=2*(height-1)) {
+      tempArrStr.push(message[t]);
     }
   }
-  arrstrmain2[i] = arrstr.join("");
-  arrstr = [];
+  mainArrStr_p2[i] = tempArrStr.join("");
+  tempArrStr = [];
 
   k++;
   i++;
 }
 
-var str = "";
-arrstrmain1 = arrstrmain1.reverse();
-str += arrstrmain1[0];
-var a = 1;
-var index = 0;
+mainArrStr_p1 = mainArrStr_p1.reverse();
+encodeMessage += mainArrStr_p1[0];
 
-while(a != key){
-  var subindex = 0;
-  for (var j = 0; j < arrstrmain1[a].length; j++) {
-    str+=arrstrmain1[a][j];
+while(a != height){
+  subIndex = 0;
 
-    str+=arrstrmain2[index][subindex] || "";
-
-    subindex++;
+  for (var j = 0; j < mainArrStr_p1[a].length; j++) {
+    encodeMessage+=mainArrStr_p1[a][j];
+    encodeMessage+=mainArrStr_p2[index][subIndex] || "";
+    subIndex++;
   }
   index++;
   a++;
+
 }
-document.write(str);
+document.querySelector("#rezult").innerHTML = encodeMessage;
